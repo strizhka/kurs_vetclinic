@@ -12,9 +12,9 @@ namespace vetclinic
         private string _name;
         private int _age;
         private string _breed;
-        //owner
-        //medical history
         public int PetID;
+
+        //public Owner Owner { get; set; }
 
         public bool Gender { get; set; }
 
@@ -66,7 +66,7 @@ namespace vetclinic
 
         public string GetInfo()
         {
-            return $"Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
+            return $"ID {PetID}  Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
         }
     }
 }

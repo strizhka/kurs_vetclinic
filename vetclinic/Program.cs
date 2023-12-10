@@ -21,6 +21,16 @@ namespace vetclinic
             {
                 Console.WriteLine(st.GetInfo());
             }
+
+            Owner owner = new Owner("sdfv", "sdfvghehe", "ddd");
+
+            OwnerBase owners= new OwnerBase();
+            owners.AddToList(owner);
+
+            foreach (var st in owners.GetList())
+            {
+                Console.WriteLine(st.GetInfo());
+            }
         }
     }
 }
