@@ -12,6 +12,8 @@ namespace vetclinic
         private string _name;
         private int _age;
         private string _breed;
+        //owner
+        //medical history
         public int PetID;
 
         public bool Gender { get; set; }
@@ -23,7 +25,12 @@ namespace vetclinic
             init => _name = !string.IsNullOrEmpty(value) ? value : "Не указано";
         }
 
+        public string Breed
+        {
+            get => _breed;
 
+            init => _breed = !string.IsNullOrEmpty(value) ? value : "Не указано";
+        }
 
         public int Age
         {
@@ -40,11 +47,26 @@ namespace vetclinic
             }
         }
 
-        public Pet(string name, string lastname, int age)
+        public Pet(string name, int age, string breed, bool gender)
         {
             Name = name;
             Age = age;
+            Breed = breed;
+            Gender = gender;
             PetID = CountID++;
+        }
+
+        public string GetGender()
+        {
+            if (Gender)
+                return "М";
+            else
+                return "Ж";
+        }
+
+        public string GetInfo()
+        {
+            return $"Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
         }
     }
 }
