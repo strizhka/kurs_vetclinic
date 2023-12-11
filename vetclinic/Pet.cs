@@ -14,9 +14,9 @@ namespace vetclinic
         private string _breed;
         public int PetID;
 
-        public Owner Owner { get; set; }
-
         public bool Gender { get; set; }
+
+        public Owner Owner { get; set; }            //Способ для добавления животного в список владельца
 
         public string Name
         {

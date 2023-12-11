@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,10 @@ namespace vetclinic
                 throw new ArgumentException("Уже имеется в списке");
         }
 
-        public void RemoveByID(int petID)
+        public void RemoveByID(int ID)
         {
-            if (_list.Contains(FindByID(petID)))
-                _list.Remove(FindByID(petID));
+            if (_list.Contains(FindByID(ID)))
+                _list.Remove(FindByID(ID));
             else
                 throw new ArgumentException("Не найдено в списке");
         }
