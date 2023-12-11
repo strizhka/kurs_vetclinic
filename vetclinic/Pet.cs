@@ -14,7 +14,7 @@ namespace vetclinic
         private string _breed;
         public int PetID;
 
-        //public Owner Owner { get; set; }
+        public Owner Owner { get; set; }
 
         public bool Gender { get; set; }
 
@@ -47,6 +47,16 @@ namespace vetclinic
             }
         }
 
+        public Pet(string name, int age, string breed, bool gender, Owner owner)
+        {
+            Name = name;
+            Age = age;
+            Breed = breed;
+            Gender = gender;
+            Owner = owner;
+            PetID = CountID++;
+        }
+
         public Pet(string name, int age, string breed, bool gender)
         {
             Name = name;
@@ -66,7 +76,7 @@ namespace vetclinic
 
         public string GetInfo()
         {
-            return $"ID {PetID}  Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
+            return $"ID {PetID}  Владелец: {Owner?.Name ?? "Не указано"}  Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
         }
     }
 }

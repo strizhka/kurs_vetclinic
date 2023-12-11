@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace vetclinic
         private string _name;
         private string _lastName;
         private string _adress;
-        //private List<Pet> _pets;
+        private List<Pet> pets;
         public int OwnerID;
 
         public string Name
@@ -41,7 +42,22 @@ namespace vetclinic
             Name = name;
             LastName = lastname;
             Adress = adress;
+            pets = new List<Pet>();
             OwnerID = CountID++;
+        }
+
+        public void AddPet(Pet pet)
+        {
+            if (pet != null && !pets.Contains(pet))
+            {
+                pet.Owner = this;
+                pets.Add(pet);
+            }
+        }
+
+        public IEnumerable<Pet> GetPets()
+        {
+            return pets.AsReadOnly();
         }
 
         public string GetInfo()

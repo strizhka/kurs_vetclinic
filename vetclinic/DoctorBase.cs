@@ -14,7 +14,7 @@ namespace vetclinic
 
         public override Doctor FindByID(int doctorID)
         {
-            return _list.Find(doctor => doctor.DoctorID == doctorID);
+            return _list.Find(doctor => doctor.DoctorID == doctorID) ?? throw new ArgumentException("Не найдено в списке");
         }
 
     }

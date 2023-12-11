@@ -15,17 +15,17 @@ namespace vetclinic
             _list = new List<T>();
         }
 
-        public Base(List<T> pets)
+        public Base(List<T> list)
         {
-            _list = pets;
+            _list = list;
         }
 
-        public void AddToList(T pet)
+        public void AddToList(T item)
         {
-            if (!_list.Contains(pet) && pet != null)
-                _list.Add(pet);
+            if (!_list.Contains(item) && item != null)
+                _list.Add(item);
             else
-                throw new ArgumentException("В списке уже есть это животное!");
+                throw new ArgumentException("Уже имеется в списке");
         }
 
         public void RemoveByID(int petID)
@@ -33,7 +33,7 @@ namespace vetclinic
             if (_list.Contains(FindByID(petID)))
                 _list.Remove(FindByID(petID));
             else
-                throw new ArgumentException("Такого животного нет в базе!");
+                throw new ArgumentException("Не найдено в списке");
         }
 
         public abstract T FindByID(int ID);

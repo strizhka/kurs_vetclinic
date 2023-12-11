@@ -15,6 +15,7 @@ namespace vetclinic
         public Appointment(DateTime appointmentDate) 
         {
             AppointmentDate = appointmentDate;
+            AppointmentID = CountID++;
         }
     }
 }

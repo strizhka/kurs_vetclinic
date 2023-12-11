@@ -15,7 +15,7 @@ namespace vetclinic
 
         public override Pet FindByID(int petID)
         {
-            return _list.Find(pet => pet.PetID == petID);
+            return _list.Find(pet => pet.PetID == petID) ?? throw new ArgumentException("Не найдено в списке");
         }
     }
 }
