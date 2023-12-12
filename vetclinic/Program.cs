@@ -21,14 +21,14 @@ namespace vetclinic
 
             pets.AddToList(cat);
             pets.AddToList(dog);
-            Appointment appointment = new Appointment(cat);
-            Treatment treatment = new Treatment("hahah", 800);
-            Treatment treatment1 = new Treatment("nnnn", 100);
-            appointment.AddTreatment(treatment);
-            appointment.AddTreatment(treatment1);
-            appointments.AddToList(appointment);
+            //Appointment appointment = new Appointment(cat);
+            //Treatment treatment = new Treatment("hahah", 800);
+            //Treatment treatment1 = new Treatment("nnnn", 100);
+            //appointment.AddTreatment(treatment);
+            //appointment.AddTreatment(treatment1);
+            //appointments.AddToList(appointment);
 
-            Owner owner = new Owner("людмила", "гурченко", "ddd");
+            Owner owner = new Owner("Людмила", "Гурченко", "ddd");
             owners.AddToList(owner);
             owner.AddPet(cat);
 
@@ -177,18 +177,24 @@ namespace vetclinic
 
             void RemovePet()
             {
-                Output.Print("Введите ID животного для удаления");
-                string id = Output.Read();
-                try 
+                if (!pets.GetList().Any())
                 {
-                    int.TryParse(id, out int number);
-                    pets.RemoveByID(number);
+                    Output.Print("В базе еще нет ни одного животного");
                 }
-                catch (ArgumentException)
+                else
                 {
-                    Output.Print("Не найдено в списке");
+                    Output.Print("Введите ID животного для удаления");
+                    string id = Output.Read();
+                    try
+                    {
+                        int.TryParse(id, out int number);
+                        pets.RemoveByID(number);
+                    }
+                    catch (ArgumentException)
+                    {
+                        Output.Print("Не найдено в списке");
+                    }
                 }
-                
             }
 
             void AddOwner()
@@ -228,48 +234,67 @@ namespace vetclinic
 
             void PrintOwnerPets()
             {
-                PrintOwners();
-                Output.Print("Введите ID человека, чьих животных хотите посмотреть");
-                string id = Output.Read();
-                try
+                if (!owners.GetList().Any())
                 {
-                    int.TryParse(id, out int num);
-                    Output.Print($"На владельца {owners.FindByID(num).Name} записаны следующие животные:");
-                    foreach (Pet pet in owners.FindByID(num).GetPets())
-                    {
-                        Output.Print(pet.GetInfo());
-                    }
+                    Output.Print("В базе еще нет ни одного владельца");
                 }
-                catch (Exception)
+                else
                 {
-                    Output.Print("Список пуст или не существует");
+                    PrintOwners();
+                    Output.Print("Введите ID человека, чьих животных хотите посмотреть");
+                    string id = Output.Read();
+                    try
+                    {
+                        int.TryParse(id, out int num);
+                        Output.Print($"На владельца {owners.FindByID(num).Name} записаны следующие животные:");
+                        foreach (Pet pet in owners.FindByID(num).GetPets())
+                        {
+                            Output.Print(pet.GetInfo());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Output.Print("Список пуст или не существует");
+                    }
                 }
             }
 
             void RemoveOwner()
             {
-                PrintOwners();
-                Output.Print("Введите ID человека для удаления");
-                string id = Output.Read();
-                try
+                if (!owners.GetList().Any())
                 {
-                    int.TryParse(id, out int num);
-                    foreach (Pet pet in owners.FindByID(num).GetPets())
+                    Output.Print("В базе еще нет ни одного владельца");
+                }
+                else
+                {
+                    PrintOwners();
+                    Output.Print("Введите ID человека для удаления");
+                    string id = Output.Read();
+                    try
                     {
-                        owners.FindByID(num).RemovePet(pet);
+                        int.TryParse(id, out int num);
+                        foreach (Pet pet in owners.FindByID(num).GetPets())
+                        {
+                            owners.FindByID(num).RemovePet(pet);
+                        }
+                        owners.RemoveByID(num);
+                        Output.Print("Владелец удален из базы. У животных, пренадлежавших ему, больше не указан владелец");
                     }
-                    owners.RemoveByID(num);
-                    Output.Print("Владелец удален из базы. У животных, пренадлежавших ему, больше не указан владелец");
+                    catch (Exception)
+                    {
+                        Output.Print("Не найдено в списке");
+                    }
                 }
-                catch (Exception)
-                {
-                    Output.Print("Не найдено в списке");
-                }
-
             }
 
             void ScheduleAppointment()
             {
+                if (!pets.GetList().Any())
+                {
+                    Output.Print("В базе еще нет ни одного животного. Добавьте его");
+                    AddPet();
+                }
+
                 PrintPets();
                 Output.Print("Введите ID животного, которого надо записать на прием");
                 string id = Output.Read();
@@ -288,18 +313,25 @@ namespace vetclinic
 
             void AddTreatment()
             {
-                Output.Print("Введите ID приема, на котором провелись процедуры");
-                string appointmentID = Output.Read();
-                Output.Print("Введите название, цену процедуры");
-                try
+                if (!appointments.GetList().Any())
                 {
-                    Treatment treatment = new Treatment(Output.Read(), double.Parse(Output.Read()));
-                    int.TryParse(appointmentID, out int appid);
-                    appointments.FindByID(appid).AddTreatment(treatment);
+                    Output.Print("В базе еще нет ни одного приема");
                 }
-                catch (Exception)
+                else
                 {
-                    Output.Print("Неверный ввод данных");
+                    Output.Print("Введите ID приема, на котором провелись процедуры");
+                    string appointmentID = Output.Read();
+                    Output.Print("Введите название, цену процедуры");
+                    try
+                    {
+                        Treatment treatment = new Treatment(Output.Read(), double.Parse(Output.Read()));
+                        int.TryParse(appointmentID, out int appid);
+                        appointments.FindByID(appid).AddTreatment(treatment);
+                    }
+                    catch (Exception)
+                    {
+                        Output.Print("Неверный ввод данных");
+                    }
                 }
             }
 
