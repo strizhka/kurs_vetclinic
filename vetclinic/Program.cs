@@ -271,7 +271,7 @@ namespace vetclinic
             void ScheduleAppointment()
             {
                 PrintPets();
-                Output.Print("Введите ID животного, котый записывается на прием");
+                Output.Print("Введите ID животного, которого надо записать на прием");
                 string id = Output.Read();
                 try
                 {
@@ -348,11 +348,20 @@ namespace vetclinic
             {
                 Pet pet = appointment.Pet;
                 if (pet is Bird)
+                {
                     TotalCost += 700;
+                    Output.Print($"Цена приема для птиц: {TotalCost}");
+                }
                 else if (pet is Reptile)
+                {
                     TotalCost += 900;
+                    Output.Print($"Цена приема для рептилий: {TotalCost}");
+                }
                 else if (pet is Pet)
+                {
                     TotalCost += 500;
+                    Output.Print($"Цена приема: {TotalCost}");
+                }
 
                 foreach (Treatment treatment in appointment.GetList())
                 {
