@@ -34,7 +34,7 @@ namespace vetclinic
             if (_list.Contains(FindByID(ID)))
                 _list.Remove(FindByID(ID));
             else
-                throw new ArgumentException("Не найдено в списке");
+                throw new ArgumentException();
         }
 
         public abstract T FindByID(int ID);

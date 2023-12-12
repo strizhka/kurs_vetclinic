@@ -14,10 +14,5 @@ namespace vetclinic
         {
             IsSnake = isSnake;
         }
-
-        public Reptile(string name, int age, string breed, bool gender, Owner owner, bool isSnake) : base(name, age, breed, gender, owner)
-        {
-            IsSnake = isSnake;
-        }
     }
 }

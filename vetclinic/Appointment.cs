@@ -11,14 +11,15 @@ namespace vetclinic
     {
         public static int CountID = 0;
         public int AppointmentID;
-        private List<Treatment> _treatments;
+        private List<Treatment> treatments;
         public Pet Pet { get; set; }
         public DateTime AppointmentDate { get; set; }
 
-        public Appointment(DateTime appointmentDate, Pet pet) 
+        public Appointment(Pet pet) 
         {
-            AppointmentDate = appointmentDate;
+            AppointmentDate = DateTime.Now;
             Pet = pet;
+            treatments = new List<Treatment>();
             AppointmentID = CountID++;
         }
 
@@ -26,12 +27,12 @@ namespace vetclinic
         {
             if (treatment != null) 
             { 
-                _treatments.Add(treatment);
+                treatments.Add(treatment);
             }
         }
         public IEnumerable<Treatment> GetList()
         {
-            return _treatments.AsReadOnly();
+            return treatments.AsReadOnly();
         }
     }
 }

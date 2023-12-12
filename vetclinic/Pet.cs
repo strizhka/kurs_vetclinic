@@ -16,7 +16,7 @@ namespace vetclinic
 
         public bool Gender { get; set; }
 
-        public Owner Owner { get; set; }            //Способ для добавления животного в список владельца
+        public Owner Owner { get; set; }
 
         public string Name
         {
@@ -45,16 +45,6 @@ namespace vetclinic
                     throw new ArgumentOutOfRangeException(nameof(Age), "Неверно указан возраст");
                 }
             }
-        }
-
-        public Pet(string name, int age, string breed, bool gender, Owner owner)
-        {
-            Name = name;
-            Age = age;
-            Breed = breed;
-            Gender = gender;
-            Owner = owner;
-            PetID = CountID++;
         }
 
         public Pet(string name, int age, string breed, bool gender)

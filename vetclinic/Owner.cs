@@ -55,6 +55,15 @@ namespace vetclinic
             }
         }
 
+        public void RemovePet(Pet pet)
+        {
+            if (pet != null && pets.Contains(pet))
+            {
+                pet.Owner = null;
+                pets.Remove(pet);
+            }
+        }
+
         public IEnumerable<Pet> GetPets()
         {
             return pets.AsReadOnly();
