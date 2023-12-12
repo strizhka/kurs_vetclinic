@@ -44,7 +44,7 @@ namespace vetclinic
 
         public string GetInfo()
         {
-            return $"ID {TreatmentID}  Имя: {Name}  Стоимость: {Price}";
+            return $"ID {TreatmentID}  Название: {Name}  Стоимость: {Price}";
         }
     }
 }

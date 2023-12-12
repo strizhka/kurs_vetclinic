@@ -12,7 +12,7 @@ namespace vetclinic
         public static int CountID = 0;
         private string _name;
         private string _lastName;
-        private string _adress;
+        private string _email;
         private List<Pet> pets;
         public int OwnerID;
 
@@ -30,18 +30,18 @@ namespace vetclinic
             init => _lastName = !string.IsNullOrEmpty(value) ? value : "Не указано";
         }
 
-        public string Adress
+        public string Email
         {
-            get => _adress;
+            get => _email;
 
-            init => _adress = !string.IsNullOrEmpty(value) ? value : "Не указано";
+            init => _email = !string.IsNullOrEmpty(value) ? value : "Не указано";
         }
 
-        public Owner(string name, string lastname, string adress)
+        public Owner(string name, string lastname, string email)
         {
             Name = name;
             LastName = lastname;
-            Adress = adress;
+            Email = email;
             pets = new List<Pet>();
             OwnerID = CountID++;
         }
@@ -60,7 +60,6 @@ namespace vetclinic
             if (pet != null && pets.Contains(pet))
             {
                 pet.Owner = null;
-                pets.Remove(pet);
             }
         }
 
@@ -71,7 +70,7 @@ namespace vetclinic
 
         public string GetInfo()
         {
-            return $"ID {OwnerID}  Имя: {Name}  Фамилия: {LastName}  Адрес: {Adress}";
+            return $"ID {OwnerID}  Имя: {Name}  Фамилия: {LastName}  Адрес почты: {Email}";
         }
     }
 }

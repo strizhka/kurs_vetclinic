@@ -30,6 +30,7 @@ namespace vetclinic
                 treatments.Add(treatment);
             }
         }
+
         public IEnumerable<Treatment> GetList()
         {
             return treatments.AsReadOnly();

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Sockets;
 
@@ -27,33 +28,9 @@ namespace vetclinic
             appointment.AddTreatment(treatment1);
             appointments.AddToList(appointment);
 
-
-            //Output.Print(pets.FindByID(1).GetInfo());
-
-            //pets.RemoveByID(1);
-
-            //foreach (var st in pets.GetList())
-            //{
-            //    Output.Print(st.GetInfo());
-            //}
-
             Owner owner = new Owner("людмила", "гурченко", "ddd");
-            cat.Owner = owner;
-
-            //OwnerBase owners= new OwnerBase();
             owners.AddToList(owner);
             owner.AddPet(cat);
-
-            //foreach (var st in owners.GetList())
-            //{
-            //    Output.Print(st.GetInfo());
-            //}
-
-            //foreach (var st in pets.GetList())
-            //{
-            //    Output.Print(st.GetInfo());
-            //}
-
 
             bool showMenu = true;
             while (showMenu)
@@ -89,6 +66,7 @@ namespace vetclinic
                         return true;
 
                     case "3":
+                        PrintPets();
                         RemovePet();
                         return true;
 
@@ -125,7 +103,7 @@ namespace vetclinic
                         return true;
 
                     case "12":
-                        Console.Clear();
+                        Output.Clear();
                         return true;
 
                     case "13":
@@ -135,8 +113,6 @@ namespace vetclinic
                         return true;
                 }
             }
-
-            //добавить надписи типа "на владельца {} записаны следующие животные:
 
             void AddPet()
             {
@@ -201,7 +177,7 @@ namespace vetclinic
 
             void RemovePet()
             {
-                Output.Print("Введите ID животного");
+                Output.Print("Введите ID животного для удаления");
                 string id = Output.Read();
                 try 
                 {
@@ -217,14 +193,14 @@ namespace vetclinic
 
             void AddOwner()
             {
-                Output.Print("Введите последовательно: имя, фамилию, породу, пол (true - м, false - ж)");
+                Output.Print("Введите последовательно: имя, фамилию, адрес электронной почты");
                 Owner owner = new Owner(Output.Read(), Output.Read(), Output.Read());
                 owners.AddToList(owner);
             }
 
             void PrintOwners()
             {
-                foreach (var ow in owners.GetList())
+                foreach (Owner ow in owners.GetList())
                 {
                     Output.Print(ow.GetInfo());
                 }
@@ -232,14 +208,16 @@ namespace vetclinic
 
             void AssignOwner()
             {
+                PrintOwners();
                 Output.Print("Введите ID человека");
                 string ownerID = Output.Read();
+                PrintPets();
                 Output.Print("Введите ID животного");
                 string petID = Output.Read();
                 try
                 {
                     int.TryParse(ownerID, out int owid);
-                    int.TryParse(ownerID, out int pid);
+                    int.TryParse(petID, out int pid);
                     owners.FindByID(owid).AddPet(pets.FindByID(pid));
                 }
                 catch (ArgumentException)
@@ -250,11 +228,13 @@ namespace vetclinic
 
             void PrintOwnerPets()
             {
-                Output.Print("Введите ID человека");
+                PrintOwners();
+                Output.Print("Введите ID человека, чьих животных хотите посмотреть");
                 string id = Output.Read();
                 try
                 {
                     int.TryParse(id, out int num);
+                    Output.Print($"На владельца {owners.FindByID(num).Name} записаны следующие животные:");
                     foreach (Pet pet in owners.FindByID(num).GetPets())
                     {
                         Output.Print(pet.GetInfo());
@@ -268,7 +248,8 @@ namespace vetclinic
 
             void RemoveOwner()
             {
-                Output.Print("Введите ID человека");
+                PrintOwners();
+                Output.Print("Введите ID человека для удаления");
                 string id = Output.Read();
                 try
                 {
@@ -278,6 +259,7 @@ namespace vetclinic
                         owners.FindByID(num).RemovePet(pet);
                     }
                     owners.RemoveByID(num);
+                    Output.Print("Владелец удален из базы. У животных, пренадлежавших ему, больше не указан владелец");
                 }
                 catch (Exception)
                 {
@@ -288,25 +270,25 @@ namespace vetclinic
 
             void ScheduleAppointment()
             {
-                Output.Print("Введите ID животного");
+                PrintPets();
+                Output.Print("Введите ID животного, котый записывается на прием");
                 string id = Output.Read();
                 try
                 {
                     int.TryParse(id, out int number);
                     Appointment appointment = new Appointment(pets.FindByID(number));
                     appointments.AddToList(appointment);
+                    Output.Print($"{pets.FindByID(number).Name} записан на прием {appointment.AppointmentDate}");
                 }
                 catch (ArgumentException)
                 {
                     Output.Print("Такого животного нет");
                 }
-                //Appointment appointment = new Appointment(Pet pet);
-                //appointments.AddToList(appointment);
             }
 
             void AddTreatment()
             {
-                Output.Print("Введите ID приема");
+                Output.Print("Введите ID приема, на котором провелись процедуры");
                 string appointmentID = Output.Read();
                 Output.Print("Введите название, цену процедуры");
                 try
@@ -350,6 +332,11 @@ namespace vetclinic
             public static string Read()
             {
                 return Console.ReadLine();
+            }
+
+            public static void Clear()
+            { 
+                Console.Clear();
             }
         }
 
