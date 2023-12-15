@@ -13,6 +13,7 @@ namespace vetclinic
         private int _age;
         private string _breed;
         public int PetID;
+        public int Min = 500;
 
         public bool Gender { get; set; }
 

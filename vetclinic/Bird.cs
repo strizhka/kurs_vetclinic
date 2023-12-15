@@ -9,7 +9,7 @@ namespace vetclinic
     internal class Bird : Pet
     {
         public bool Flying { get; set; }
-        public double AdditionalPrice = 700;
+        public new int Min = 700;
         public Bird(string name, int age, string breed, bool gender, bool flying) : base(name, age, breed, gender)
         {
             Flying = flying;
