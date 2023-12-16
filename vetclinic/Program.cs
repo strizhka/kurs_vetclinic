@@ -22,12 +22,29 @@ namespace vetclinic
 
             pets.AddToList(cat);
             pets.AddToList(dog);
+            pets.AddToList(bird);
+
             Appointment appointment = new Appointment(cat);
-            Treatment treatment = new Treatment("Анализы", 800);
-            Treatment treatment1 = new Treatment("Укол", 100);
+            Appointment appointment1 = new Appointment(bird);
+
+            Treatment treatment = new Treatment("Анализ А", 800);
+            Treatment treatment1 = new Treatment("Анализ Б", 1000);
+            Treatment treatment2 = new Treatment("Обрезка когтей", 300);
+            Treatment treatment3 = new Treatment("Анализ В", 950);
+            Treatment treatment4 = new Treatment("Обработка от паразитов", 800);
+            Treatment treatment5 = new Treatment("Оформление вет паспорта", 100);
+
             appointment.AddTreatment(treatment);
-            appointment.AddTreatment(treatment1);
+            appointment.AddTreatment(treatment2);
+            appointment1.AddTreatment(treatment3);
+            appointment.AddTreatment(treatment4);
+
+            appointment1.AddTreatment(treatment1);
+            appointment1.AddTreatment(treatment3);
+            appointment1.AddTreatment(treatment5);
+
             appointments.AddToList(appointment);
+            appointments.AddToList(appointment1);
 
             Owner owner = new Owner("Людмила", "Сушкина", "Email");
             owners.AddToList(owner);

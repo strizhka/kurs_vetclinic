@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace vetclinic
 {
-    public abstract class Base<T> where T : class
+    public abstract class Base<T> where T : class       //шаблон подо все базы (животные, люди, приемы)
     {
         protected List<T> _list;
 

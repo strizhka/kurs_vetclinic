@@ -8,7 +8,7 @@ namespace vetclinic
 {
     internal class Menu
     {
-        public  static bool MainMenu(PetBase pets, OwnerBase owners, AppointmentBase appointments)
+        public static bool MainMenu(PetBase pets, OwnerBase owners, AppointmentBase appointments)
         {
             Output.Print("\nЧто нужно сделать?\n" +
                 "1 - Добавить животное\n" +
@@ -84,7 +84,7 @@ namespace vetclinic
             }
         }
 
-        public static void AddPet(PetBase pets)
+        private static void AddPet(PetBase pets)
         {
             Output.Print("1 - Обычное животное  2 - Птица  3 - Рептилия");
             switch (Output.Read())
@@ -152,7 +152,7 @@ namespace vetclinic
             }
         }
 
-        public static void PrintPets(PetBase pets)
+        private static void PrintPets(PetBase pets)
         {
             foreach (Pet pt in pets.GetList())
             {
@@ -160,7 +160,7 @@ namespace vetclinic
             }
         }
 
-        public static void RemovePet(PetBase pets)
+        private static void RemovePet(PetBase pets)
         {
             if (!pets.GetList().Any())
             {
@@ -182,14 +182,14 @@ namespace vetclinic
             }
         }
 
-        public static void AddOwner(OwnerBase owners)
+        private static void AddOwner(OwnerBase owners)
         {
             Output.Print("Введите последовательно: имя, фамилию, адрес электронной почты");
             Owner owner = new Owner(Output.Read(), Output.Read(), Output.Read());
             owners.AddToList(owner);
         }
 
-        public static void PrintOwners(OwnerBase owners)
+        private static void PrintOwners(OwnerBase owners)
         {
             foreach (Owner ow in owners.GetList())
             {
@@ -197,7 +197,7 @@ namespace vetclinic
             }
         }
 
-        public static void AssignOwner(OwnerBase owners, PetBase pets)
+        private static void AssignOwner(OwnerBase owners, PetBase pets)
         {
             PrintOwners(owners);
             Output.Print("Введите ID человека");
@@ -209,7 +209,7 @@ namespace vetclinic
             {
                 int.TryParse(ownerID, out int owid);
                 int.TryParse(petID, out int pid);
-                owners.FindByID(owid).AddPet(pets.FindByID(pid));
+                owners.FindByID(owid)?.AddPet(pets.FindByID(pid));
             }
             catch (ArgumentException)
             {
@@ -217,7 +217,7 @@ namespace vetclinic
             }
         }
 
-        public static void PrintOwnerPets(OwnerBase owners)
+        private static void PrintOwnerPets(OwnerBase owners)
         {
             if (!owners.GetList().Any())
             {
@@ -244,7 +244,7 @@ namespace vetclinic
             }
         }
 
-        public static void RemoveOwner(OwnerBase owners)
+        private static void RemoveOwner(OwnerBase owners)
         {
             if (!owners.GetList().Any())
             {
@@ -272,7 +272,7 @@ namespace vetclinic
             }
         }
 
-        public static void ScheduleAppointment(PetBase pets, AppointmentBase appointments)
+        private static void ScheduleAppointment(PetBase pets, AppointmentBase appointments)
         {
             if (!pets.GetList().Any())
             {
@@ -296,7 +296,7 @@ namespace vetclinic
             }
         }
 
-        public static void AddTreatment(AppointmentBase appointments)
+        private static void AddTreatment(AppointmentBase appointments)
         {
             if (!appointments.GetList().Any())
             {
@@ -306,11 +306,12 @@ namespace vetclinic
             {
                 Output.Print("Введите ID приема, на котором провелись процедуры");
                 string appointmentID = Output.Read();
-                Output.Print("Введите название, цену процедуры");
+                
                 try
-                {
-                    Treatment treatment = new Treatment(Output.Read(), double.Parse(Output.Read()));
+                {   
                     int.TryParse(appointmentID, out int appid);
+                    Output.Print("Введите название, цену процедуры");
+                    Treatment treatment = new Treatment(Output.Read(), double.Parse(Output.Read()));
                     appointments.FindByID(appid).AddTreatment(treatment);
                 }
                 catch (Exception)
@@ -320,7 +321,7 @@ namespace vetclinic
             }
         }
 
-        public static void CreateBill(AppointmentBase appointments)
+        private static void CreateBill(AppointmentBase appointments)
         {
             Output.Print("Введите ID приема");
             string appointmentID = Output.Read();
