@@ -8,15 +8,15 @@ namespace vetclinic
 {
     internal class Pet
     {
-        public static int CountID = 0;
         private string _name;
         private int _age;
         private string _breed;
+        public static int CountID = 0;
         public int PetID;
 
-        public virtual int Min { get { return 500; } }
+        public virtual int Min { get => 500; }
 
-        public bool Gender { get; set; }
+        public bool IsMale { get; set; }
 
         public Owner Owner { get; set; }
 
@@ -54,19 +54,19 @@ namespace vetclinic
             Name = name;
             Age = age;
             Breed = breed;
-            Gender = gender;
+            IsMale = gender;
             PetID = CountID++;
         }
 
         public string GetGender()
         {
-            if (Gender)
+            if (IsMale)
                 return "М";
             else
                 return "Ж";
         }
 
-        public string GetInfo()
+        public virtual string GetInfo()
         {
             return $"ID {PetID}  Владелец: {Owner?.Name ?? "Не указано"}  Кличка: {Name}  Возраст: {Age}  Порода: {Breed}  Пол: {GetGender()}";
         }

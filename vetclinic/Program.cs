@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Sockets;
+using vetclinic.Bases;
 
 namespace vetclinic
 {

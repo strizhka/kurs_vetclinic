@@ -9,11 +9,11 @@ namespace vetclinic
 {
     internal class Owner
     {
-        public static int CountID = 0;
         private string _name;
         private string _lastName;
         private string _email;
-        private List<Pet> pets;
+        private List<Pet> _pets;
+        public static int CountID = 0;
         public int OwnerID;
 
         public string Name
@@ -42,22 +42,22 @@ namespace vetclinic
             Name = name;
             LastName = lastname;
             Email = email;
-            pets = new List<Pet>();
+            _pets = new List<Pet>();
             OwnerID = CountID++;
         }
 
         public void AddPet(Pet pet)
         {
-            if (pet != null && !pets.Contains(pet))
+            if (pet != null && !_pets.Contains(pet))
             {
                 pet.Owner = this;
-                pets.Add(pet);
+                _pets.Add(pet);
             }
         }
 
         public void RemovePet(Pet pet)
         {
-            if (pet != null && pets.Contains(pet))
+            if (pet != null && _pets.Contains(pet))
             {
                 pet.Owner = null;
             }
@@ -65,7 +65,7 @@ namespace vetclinic
 
         public IEnumerable<Pet> GetPets()
         {
-            return pets.AsReadOnly();
+            return _pets.AsReadOnly();
         }
 
         public string GetInfo()

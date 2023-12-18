@@ -9,9 +9,9 @@ namespace vetclinic
 {
     internal class Appointment      //класс для приемов
     {
+        private List<Treatment> _treatments;     //список проводимых на приеме процедур
         public static int CountID = 0;
         public int AppointmentID;
-        private List<Treatment> treatments;     //список проводимых на приеме процедур
         public Pet Pet { get; set; }
         public DateTime AppointmentDate { get; set; }
 
@@ -19,7 +19,7 @@ namespace vetclinic
         {
             AppointmentDate = DateTime.Now;
             Pet = pet;                              //привязка к конкретному животному
-            treatments = new List<Treatment>();
+            _treatments = new List<Treatment>();
             AppointmentID = CountID++;
         }
 
@@ -27,13 +27,13 @@ namespace vetclinic
         {
             if (treatment != null) 
             { 
-                treatments.Add(treatment);
+                _treatments.Add(treatment);
             }
         }
 
         public IEnumerable<Treatment> GetList()
         {
-            return treatments.AsReadOnly();
+            return _treatments.AsReadOnly();
         }
     }
 }

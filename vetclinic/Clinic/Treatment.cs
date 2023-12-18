@@ -8,9 +8,9 @@ namespace vetclinic
 {
     internal class Treatment
     {
-        public static int CountID = 0;
         private string _name;
         private double _price;
+        public static int CountID = 0;
         public int TreatmentID;
 
         public string Name

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vetclinic
+namespace vetclinic.Bases
 {
     class OwnerBase : Base<Owner>
     {
@@ -16,6 +16,5 @@ namespace vetclinic
         {
             return _list.Find(owner => owner.OwnerID == ownerID) ?? throw new ArgumentException("Не найдено в списке");
         }
-
     }
 }

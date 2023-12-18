@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vetclinic
+namespace vetclinic.Bases
 {
     public abstract class Base<T> where T : class       //шаблон подо все базы (животные, люди, приемы)
     {

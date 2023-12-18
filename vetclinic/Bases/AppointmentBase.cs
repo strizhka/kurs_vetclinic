@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vetclinic
+namespace vetclinic.Bases
 {
     internal class AppointmentBase : Base<Appointment>
     {
