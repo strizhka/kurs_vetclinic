@@ -12,8 +12,16 @@ namespace vetclinic.Managers
         public static void AddOwner(OwnerBase owners)
         {
             Output.Print("Введите последовательно: имя, фамилию, адрес электронной почты");
-            Owner owner = new Owner(Output.Read(), Output.Read(), Output.Read());
-            owners.AddToList(owner);
+            try
+            {
+                Owner owner = new Owner(Output.Read(), Output.Read(), Output.Read());
+                owners.AddToList(owner);
+
+            }
+            catch (Exception)
+            {
+                Output.Print("Неверный ввод данных");
+            }
         }
 
         public static void PrintOwners(OwnerBase owners)
@@ -38,7 +46,11 @@ namespace vetclinic.Managers
                 int.TryParse(petID, out int pid);
                 owners.FindByID(owid)?.AddPet(pets.FindByID(pid));
             }
-            catch (ArgumentException)
+            catch (InvalidOperationException)
+            {
+                Output.Print("Неверно введен email");
+            }
+            catch (Exception)
             {
                 Output.Print("Человека или животного с таким айди не существует");
             }

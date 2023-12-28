@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace vetclinic
 {
-    internal class Treatment
+    internal class Treatment : IRefundable
     {
         private string _name;
         private double _price;
-        public static int CountID = 0;
+        public static int CountID = 1;
         public int TreatmentID;
 
         public string Name

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace vetclinic
 {
-    internal class Pet
+    internal class Pet : IRefundable
     {
         private string _name;
         private int _age;
         private string _breed;
-        public static int CountID = 0;
+        public static int CountID = 1;
         public int PetID;
 
         public virtual int Min { get => 500; }
 
-        public bool IsMale { get; set; }
+        public bool IsMale { get; init; }
 
         public Owner Owner { get; set; }
 
@@ -24,7 +24,7 @@ namespace vetclinic
         {
             get => _name;
 
-            init => _name = !string.IsNullOrEmpty(value) ? value : "Не указано";
+            set => _name = !string.IsNullOrEmpty(value) ? value : "Не указано";
         }
 
         public string Breed

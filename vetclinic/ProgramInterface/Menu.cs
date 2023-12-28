@@ -71,7 +71,8 @@ namespace vetclinic
                     return true;
 
                 case "11":
-                    Bill.PrintBill(appointments);
+                    AppointmentManager.PrintAppointments(appointments);
+                    BillsManager.PrintBill(appointments);
                     return true;
 
                 case "12":
@@ -82,6 +83,7 @@ namespace vetclinic
                     return false;
 
                 default:
+                    Output.Print("Неверный ввод");
                     return true;
             }
         }

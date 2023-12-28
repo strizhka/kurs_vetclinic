@@ -8,7 +8,7 @@ namespace vetclinic
 {
     internal class Reptile : Pet
     {
-        public bool IsSnake { get; set; }
+        public bool IsSnake { get; init; }
         public override int Min { get => 900; }
         public Reptile(string name, int age, string breed, bool gender, bool isSnake) : base(name, age, breed, gender)
         {

@@ -47,7 +47,7 @@ namespace vetclinic
             appointments.AddToList(appointment);
             appointments.AddToList(appointment1);
 
-            Owner owner = new Owner("Людмила", "Сушкина", "Email");
+            Owner owner = new Owner("Людмила", "Сушкина", "Email@smth.com");
             owners.AddToList(owner);
             owner.AddPet(cat);
 

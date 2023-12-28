@@ -9,6 +9,14 @@ namespace vetclinic.Managers
 {
     internal class AppointmentManager
     {
+        public static void PrintAppointments(AppointmentBase appointments)
+        {
+            foreach (Appointment app in appointments.GetList())
+            {
+                Output.Print(app.GetInfo());
+            }
+        }
+
         public static void ScheduleAppointment(PetBase pets, AppointmentBase appointments)
         {
             if (!pets.GetList().Any())
@@ -27,7 +35,7 @@ namespace vetclinic.Managers
                 appointments.AddToList(appointment);
                 Output.Print($"{pets.FindByID(number).Name} записан на прием {appointment.AppointmentDate}");
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 Output.Print("Такого животного нет");
             }

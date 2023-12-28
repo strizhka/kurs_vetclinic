@@ -79,9 +79,16 @@ namespace vetclinic.Managers
 
         public static void PrintPets(PetBase pets)
         {
-            foreach (Pet pt in pets.GetList())
+            if (!pets.GetList().Any())
             {
-                Output.Print(pt.GetInfo());
+                Output.Print("В базе еще нет ни одного животного");
+            }
+            else
+            {
+                foreach (Pet pt in pets.GetList())
+                {
+                    Output.Print(pt.GetInfo());
+                }
             }
         }
 
@@ -100,7 +107,7 @@ namespace vetclinic.Managers
                     int.TryParse(id, out int number);
                     pets.RemoveByID(number);
                 }
-                catch (ArgumentException)
+                catch (Exception)
                 {
                     Output.Print("Не найдено в списке");
                 }
